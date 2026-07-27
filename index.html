@@ -18,13 +18,13 @@
 <body>
   <div class="box">
     <h2>Free AI Paraphraser | Rewrite Text</h2>
-    <p class="limit">Free daily uses, no login needed</p >
+    <p class="limit">Free daily uses, no login needed</p>
     <textarea id="input" placeholder="Paste your text here..."></textarea>
     <button onclick="rewrite()">Paraphrase</button>
     <div class="result" id="result"></div>
   </div>
   <div class="tg">
-    Unlimited use & API Key → Telegram: <a href=" " target="_blank">@GoooseKing</a >
+    Unlimited use & API Key → Telegram: <a href=" " target="_blank">@GoooseKing</a>
   </div>
 
   <script>
@@ -38,12 +38,11 @@
       if(!text) return alert("Enter text");
       document.getElementById("result").innerText = "Processing...";
 
-      // 你换成自己的LLM接口即可
-      const res = await fetch("https://maas-api.cn-huabei-1.xf-yun.com/v2", {
+      // 改成同域名后端转发接口，无跨域、不泄露密钥
+      const res = await fetch("/api/chat", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
-          model: "gpt-3.5-turbo",
           messages: [{role:"user",content:"Paraphrase this text: "+text}]
         })
       });
